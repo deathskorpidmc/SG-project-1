@@ -39,6 +39,11 @@ setMissionState = [_path, "setMissionState.sqf"] call mf_compile;
 //Function Compiles
 _path = "server\functions";
 A3W_fnc_checkHackedVehicles = [_path, "checkHackedVehicles.sqf"] call mf_compile;
+A3W_fnc_deleteEmptyGroup = [_path, "fn_deleteEmptyGroup.sqf"] call mf_compile;
+A3W_fnc_registerKillScore = [_path, "fn_registerKillScore.sqf"] call mf_compile;
+A3W_fnc_requestTickTime = [_path, "fn_requestTickTime.sqf"] call mf_compile;
+A3W_fnc_setItemCleanup = [_path, "fn_setItemCleanup.sqf"] call mf_compile;
+A3W_fnc_updateSpawnTimestamp = [_path, "fn_updateSpawnTimestamp.sqf"] call mf_compile;
 addMilCap = [_path, "addMilCap.sqf"] call mf_compile;
 basePartSetup = [_path, "basePartSetup.sqf"] call mf_compile;
 cleanVehicleWreck = [_path, "cleanVehicleWreck.sqf"] call mf_compile;
@@ -78,6 +83,7 @@ weaponDisassembledServer = [_path, "weaponDisassembledServer.sqf"] call mf_compi
 
 //Player Management
 server_playerDied = [_path, "serverPlayerDied.sqf"] call mf_compile;
+A3W_fnc_serverPlayerDied = server_playerDied;
 
 //Spawning Compiles
 _path = "server\spawning";

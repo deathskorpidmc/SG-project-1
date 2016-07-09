@@ -40,7 +40,22 @@ switch (true) do
 	};
 };
 
+private _resupplyTruck = _veh getVariable ["A3W_resupplyTruck", false];
+
+if (_resupplyTruck) then
+{
+	_variables pushBack ["A3W_resupplyTruck", true];
+};
+
+private _isUav = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") > 0);
+
+if (_isUav && side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then
+{
+	_variables pushBack ["uavSide", str side _veh];
+};
+
 _owner = _veh getVariable ["ownerUID", ""];
+private _locked = 1 max locked _veh; // default vanilla state is always 1, so we ignore 0's
 
 _doubleBSlash = (call A3W_savingMethod == "extDB");
 
@@ -143,6 +158,7 @@ _props =
 	["Damage", _damage],
 	["HitPoints", _hitPoints],
 	["OwnerUID", _owner],
+	["LockState", _locked],
 	["Variables", _variables],
 	["Textures", _textures],
 
@@ -161,7 +177,7 @@ _props =
 ];
 
 // If flying and not UAV, do not save current pos/dir/vel
-if (_flying && {getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") <= 0}) then
+if (_flying && !_isUav) then
 {
 	_props deleteRange [1,3];
 };
